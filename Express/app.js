@@ -19,7 +19,7 @@ app.get('/:' + paramsName, (req, res, next) => {
 // 한 미들웨어 안에서 2개의 send를 보내면 에러뜸 그래서 조건부 내부에서 send 할때 return res.send(sth) 해야됨
 app.use(express.json()); // 요청에 들어오는 바디부분을 파싱해서 들고옴
 app.post('/', (req, res, next) => {
-  console.log(req.body);
+  console.log(1);
 });
 
 app.listen(PORT, handleListening);
