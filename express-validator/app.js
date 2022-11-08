@@ -10,7 +10,10 @@ app.use(express.json());
 
 app.post(
   '/users',
-  body('name').isLength({ min: 2 }).withMessage('Minimum name length is 2'),
+  body('name')
+    .trim()
+    .lo.isLength({ min: 2 })
+    .withMessage('Minimum name length is 2'),
   (req, res, next) => {
     const err = validationResult(req);
     if (!err.isEmpty()) {
