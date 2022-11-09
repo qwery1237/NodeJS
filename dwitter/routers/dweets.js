@@ -20,14 +20,23 @@
 import e from 'express';
 import express from 'express';
 import 'express-async-errors';
+import { body } from 'express-validator';
 import * as dweetController from '../controllers/dweets.js';
+import { validate } from '../middlewares/middlewares.js';
 
 const router = express.Router();
+const validateDweet = [
+  body('text')
+    .trim()
+    .isLength({ min: 3 })
+    .withMessage('Text should be at least 3 characters'),
+  validate,
+];
 
 router.get('/', dweetController.getDweets);
 router.get('/:id', dweetController.getDweetById);
-router.post('/', dweetController.postDweet);
-router.put('/:id', dweetController.updateDweet);
+router.post('/', validateDweet, dweetController.postDweet);
+router.put('/:id', validateDweet, dweetController.updateDweet);
 router.delete('/:id', dweetController.deleteDweet);
 
 export default router;
