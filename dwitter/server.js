@@ -5,11 +5,11 @@ import helmet from 'helmet';
 import 'express-async-errors';
 import dweetsRouter from './routers/dweets.js';
 import authRouter from './routers/auth.js';
+import { config } from './config.js';
 
 const app = express();
-const PORT = 8080;
 const handleListening = console.log(
-  `✅ Server Listening on http://localhost:${PORT}`
+  `✅ Server Listening on http://localhost:${config.host.port}`
 );
 app.use(express.json());
 app.use(helmet());
@@ -34,4 +34,4 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-app.listen(PORT, handleListening);
+app.listen(config.host.port, handleListening);
