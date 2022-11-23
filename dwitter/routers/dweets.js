@@ -17,12 +17,12 @@
  }
  */
 
-import e from 'express';
 import express from 'express';
 import 'express-async-errors';
 import { body } from 'express-validator';
 import * as dweetController from '../controllers/dweets.js';
-import { validate } from '../middlewares/middlewares.js';
+import { validate } from '../middlewares/validator.js';
+import { isAuth } from '../middlewares/auth.js';
 
 const router = express.Router();
 const validateDweet = [
@@ -33,10 +33,10 @@ const validateDweet = [
   validate,
 ];
 
-router.get('/', dweetController.getDweets);
-router.get('/:id', dweetController.getDweetById);
-router.post('/', validateDweet, dweetController.postDweet);
-router.put('/:id', validateDweet, dweetController.updateDweet);
-router.delete('/:id', dweetController.deleteDweet);
+router.get('/', isAuth, dweetController.getDweets);
+router.get('/:id', isAuth, dweetController.getDweetById);
+router.post('/', isAuth, validateDweet, dweetController.postDweet);
+router.put('/:id', isAuth, validateDweet, dweetController.updateDweet);
+router.delete('/:id', isAuth, dweetController.deleteDweet);
 
 export default router;

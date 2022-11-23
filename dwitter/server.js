@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import 'express-async-errors';
 import dweetsRouter from './routers/dweets.js';
+import authRouter from './routers/auth.js';
 
 const app = express();
 const PORT = 8080;
@@ -21,6 +22,7 @@ app.use(morgan('tiny'));
 // 트윗 삭제
 // 트윗 편집
 app.use('/dweets', dweetsRouter);
+app.use('/auth', authRouter);
 
 // snippets user config -> js.json에서 alias 설정 가능
 app.use((req, res, next) => {
