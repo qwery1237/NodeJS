@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import 'express-async-errors';
+import './db.js';
 import dweetsRouter from './routers/dweets.js';
 import authRouter from './routers/auth.js';
 import { config } from './config.js';

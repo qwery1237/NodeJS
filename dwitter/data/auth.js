@@ -1,16 +1,8 @@
-let users = [
-  {
-    id: '1',
-    username: 'bob',
-    password: '$2b$12$G9xf8SFq3oTEgdj7ozHQ/uhDOyeQcUEDU8tnOcvpvApuadr3nE5Vm',
-    name: 'Bob',
-    email: 'bob@gmail.com',
-    url: '',
-  },
-];
+import Dweet from '../models/dweet.js';
 
 export async function findByUsername(username) {
-  return users.find((user) => user.username === username);
+  const dweets = Dweet.find({ username });
+  return dweets;
 }
 export async function findById(id) {
   return users.find((user) => user.id === id);
@@ -18,6 +10,5 @@ export async function findById(id) {
 
 export async function createUser(user) {
   const created = { ...user, id: '' + (users.length + 1) };
-  users.push(created);
   return created.id;
 }
